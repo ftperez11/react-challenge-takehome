@@ -15,6 +15,7 @@ const oldState = {
     unassignedCount: 16,
 }
 class App extends React.Component {
+    userData;
     constructor(props){
         super(props)
         this.state = {
@@ -31,6 +32,36 @@ class App extends React.Component {
         this.handleReset = this.handleReset.bind(this)
     }
 
+    componentDidMount() {
+       this.userData = JSON.parse(localStorage.getItem('user'));
+       if(localStorage.getItem('user')){
+           this.setState({
+                Cards: this.userData.Cards,
+                colors:this.userData.colors,
+                currentColorIndex: this.userData.currentColorIndex,
+                redCount: this.userData.redCount,
+                blueCount: this.userData.blueCount,
+                greenCount: this.userData.greenCount,
+                unassignedCount: this.userData.unassignedCount
+           })
+       } else {
+           this.setState({
+            Cards: cards,
+            colors:["red", "green", "blue"],
+            currentColorIndex: -1,
+            redCount: 0,
+            blueCount: 0,
+            greenCount: 0,
+            unassignedCount: 16,
+           })
+       }
+    }
+    
+    
+    componentWillUpdate(nextProps, nextState) {
+        localStorage.setItem('user', JSON.stringify(nextState));
+    }
+    
     updateColorCount(colorIndex){
         var lastColorIndex = colorIndex
        

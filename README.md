@@ -1,10 +1,8 @@
-# Grid-Challenge
-
 # Introduction!
 
   - This grid game application allows a user to select the grids displayed on the screen, and cycle between colors after each click.
   - The user can also change each grids current color shade by hovering over the grid.
-  
+
 # Built-With
 
   - React, Webpack
